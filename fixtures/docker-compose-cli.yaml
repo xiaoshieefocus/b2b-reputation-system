@@ -14,6 +14,14 @@ networks:
 
 services:
 
+  ca.bom2buy-chain.com:
+    extends:
+      file:   docker-compose-base.yaml
+      service: ca.bom2buy-chain.com
+    container_name: ca.bom2buy-chain.com
+    networks:
+      - b2bnetwork
+
   orderer.bom2buy-chain.com:
     extends:
       file:   docker-compose-base.yaml
