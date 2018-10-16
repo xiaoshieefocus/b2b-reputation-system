@@ -58,6 +58,12 @@ func (t *HeroesServiceChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Res
 		return t.query(stub, args)
 	}
 
+	// The update argument will manage all update in the ledger
+	if args[0] == "invoke" {
+		return t.invoke(stub, args)
+	}
+
+	// If the arguments given don’t match any function, we return an error
 	return shim.Error("Unknown action, check the first argument")
 }
 
@@ -87,6 +93,38 @@ func (t *HeroesServiceChaincode) query(stub shim.ChaincodeStubInterface, args []
 
 	// If the arguments given don’t match any function, we return an error
 	return shim.Error("Unknown query action, check the second argument.")
+}
+
+// invoke
+// Every functions that read and write in the ledger will be here
+func (t *HeroesServiceChaincode) invoke(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+	fmt.Println("########### HeroesServiceChaincode invoke ###########")
+
+	if len(args) < 2 {
+		return shim.Error("The number of arguments is insufficient.")
+	}
+
+	// Check if the ledger key is "hello" and process if it is the case. Otherwise it returns an error.
+	if args[1] == "hello" && len(args) == 3 {
+
+		// Write the new value in the ledger
+		err := stub.PutState("hello", []byte(args[2]))
+		if err != nil {
+			return shim.Error("Failed to update state of hello")
+		}
+
+		// Notify listeners that an event "eventInvoke" have been executed (check line 19 in the file invoke.go)
+		err = stub.SetEvent("eventInvoke", []byte{})
+		if err != nil {
+			return shim.Error(err.Error())
+		}
+
+		// Return this value in response
+		return shim.Success(nil)
+	}
+
+	// If the arguments given don’t match any function, we return an error
+	return shim.Error("Unknown invoke action, check the second argument.")
 }
 
 func main() {

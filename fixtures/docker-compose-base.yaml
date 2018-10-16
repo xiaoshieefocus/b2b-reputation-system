@@ -7,14 +7,17 @@ version: '2'
 
 services:
 
-  ca.bom2buy-chain.com:
-    container_name: ca.bom2buy-chain.com
+  ca.bom2buy.bom2buy-chain.com:
+    container_name: ca.bom2buy.bom2buy-chain.com
     image: hyperledger/fabric-ca
     environment:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-      - FABRIC_CA_SERVER_CA_NAME=ca.bom2buy-chain.com
+      - FABRIC_CA_SERVER_CA_NAME=ca.bom2buy.bom2buy-chain.com
       - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.bom2buy.bom2buy-chain.com-cert.pem
-      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/7cf9524df980cb14c52a7658989229954b0e9ef1431dd1edd4ecd805a00b0626_sk
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/b60f251abc9812aebc6ebc25b636c8528c829d6f8a52cf7726e1d142c156bc06_sk
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.bom2buy.bom2buy-chain.com-cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/b60f251abc9812aebc6ebc25b636c8528c829d6f8a52cf7726e1d142c156bc06_sk
     ports:
       - "7054:7054"
     command: sh -c 'fabric-ca-server start -b admin:adminpw'
@@ -60,7 +63,7 @@ services:
       - CORE_PEER_ADDRESS=peer0.bom2buy.bom2buy-chain.com:7051
       # - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.bom2buy.bom2buy-chain.com:7051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.bom2buy.bom2buy-chain.com:7051
-      - CORE_PEER_LOCALMSPID=Bom2buyOrgMSP
+      - CORE_PEER_LOCALMSPID=Bom2buyMSP
     volumes:
         - /var/run/:/host/var/run/
         - ./crypto-config/peerOrganizations/bom2buy.bom2buy-chain.com/peers/peer0.bom2buy.bom2buy-chain.com/msp:/etc/hyperledger/fabric/msp
@@ -84,7 +87,7 @@ services:
       # - CORE_LOGGING_LEVEL=INFO
       - CORE_PEER_ID=cli
       - CORE_PEER_ADDRESS=peer0.bom2buy.bom2buy-chain.com:7051
-      - CORE_PEER_LOCALMSPID=Bom2buyOrgMSP
+      - CORE_PEER_LOCALMSPID=Bom2buyMSP
       - CORE_PEER_TLS_ENABLED=true
       - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/bom2buy.bom2buy-chain.com/peers/peer0.bom2buy.bom2buy-chain.com/tls/server.crt
       - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/bom2buy.bom2buy-chain.com/peers/peer0.bom2buy.bom2buy-chain.com/tls/server.key

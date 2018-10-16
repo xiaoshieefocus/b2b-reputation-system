@@ -21,7 +21,7 @@ func main() {
 		ChaincodeGoPath: os.Getenv("GOPATH"),
 		ChaincodePath:   "b2b-reputation-system/chaincode/",
 		OrgAdmin:        "Admin",
-		OrgName:         "bom2buy",
+		OrgName:         "Bom2buy",
 		ConfigFile:      "config.yaml",
 
 		// User parameters
@@ -40,6 +40,30 @@ func main() {
 	if err != nil {
 		fmt.Printf("Unable to install and instantiate the chaincode: %v\n", err)
 		return
+	}
+
+	// Query the chaincode
+	response, err := fSetup.QueryHello()
+	if err != nil {
+		fmt.Printf("Unable to query hello on the chaincode: %v\n", err)
+	} else {
+		fmt.Printf("Response from the query hello: %s\n", response)
+	}
+
+	// Invoke the chaincode
+	txId, err := fSetup.InvokeHello("b2b-reputation-system-test")
+	if err != nil {
+		fmt.Printf("Unable to invoke hello on the chaincode: %v\n", err)
+	} else {
+		fmt.Printf("Successfully invoke hello, transaction ID: %s\n", txId)
+	}
+
+	// Query again the chaincode
+	response, err = fSetup.QueryHello()
+	if err != nil {
+		fmt.Printf("Unable to query hello on the chaincode: %v\n", err)
+	} else {
+		fmt.Printf("Response from the query hello: %s\n", response)
 	}
 	// Close SDK
 	defer fSetup.CloseSDK()

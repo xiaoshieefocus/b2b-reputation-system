@@ -151,7 +151,7 @@ channels:
 #
 organizations:
   bom2buy:
-    mspid: Bom2buyOrgMSP
+    mspid: Bom2buyMSP
     cryptoPath: peerOrganizations/bom2buy.bom2buy-chain.com/users/{userName}@bom2buy.bom2buy-chain.com/msp
     peers:
       - peer0.bom2buy.bom2buy-chain.com
@@ -162,7 +162,7 @@ organizations:
     # dynamic certificate management (enroll, revoke, re-enroll). The following section is only for
     # Fabric-CA servers.
     certificateAuthorities:
-      - ca.bom2buy-chain.com
+      - ca.bom2buy.bom2buy-chain.com
 
 #
 # List of orderers to send transaction and channel create/update requests to. For the time
@@ -223,7 +223,7 @@ peers:
 # Certificate Authority instead of Fabric-CA, in which case this section would not be specified.
 #
 certificateAuthorities:
-  ca.bom2buy-chain.com:
+  ca.bom2buy.bom2buy-chain.com:
     url: http://localhost:7054
     # Fabric-CA supports dynamic user enrollment via REST APIs. A "root" user, a.k.a registrar, is
     # needed to enroll and invoke new users.
@@ -233,7 +233,7 @@ certificateAuthorities:
       enrollId: admin
       enrollSecret: adminpw
     # [Optional] The optional name of the CA.
-    caName: ca.bom2buy-chain.com
+    caName: ca.bom2buy.bom2buy-chain.com
     tlsCACerts:
       # Certificate location absolute path
       path: ${GOPATH}/src/b2b-reputation-system/fixtures/crypto-config/peerOrganizations/bom2buy.bom2buy-chain.com/ca/ca.bom2buy.bom2buy-chain.com-cert.pem

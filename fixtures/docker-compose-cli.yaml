@@ -14,11 +14,11 @@ networks:
 
 services:
 
-  ca.bom2buy-chain.com:
+  ca.bom2buy.bom2buy-chain.com:
     extends:
       file:   docker-compose-base.yaml
-      service: ca.bom2buy-chain.com
-    container_name: ca.bom2buy-chain.com
+      service: ca.bom2buy.bom2buy-chain.com
+    container_name: ca.bom2buy.bom2buy-chain.com
     networks:
       - b2bnetwork
 
@@ -50,7 +50,7 @@ services:
       # - CORE_LOGGING_LEVEL=INFO
       - CORE_PEER_ID=cli
       - CORE_PEER_ADDRESS=peer0.bom2buy.bom2buy-chain.com:7051
-      - CORE_PEER_LOCALMSPID=Bom2buyOrgMSP
+      - CORE_PEER_LOCALMSPID=Bom2buy
       - CORE_PEER_TLS_ENABLED=true
       - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/bom2buy.bom2buy-chain.com/peers/peer0.bom2buy.bom2buy-chain.com/tls/server.crt
       - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/bom2buy.bom2buy-chain.com/peers/peer0.bom2buy.bom2buy-chain.com/tls/server.key

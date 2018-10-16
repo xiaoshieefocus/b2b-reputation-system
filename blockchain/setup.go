@@ -96,7 +96,7 @@ func (setup *FabricSetup) InstallAndInstantiateCC() error {
 	}
 	fmt.Println("Chaincode installed")
 
-	ccPolicy := cauthdsl.SignedByAnyMember([]string{"bom2buy.bom2uy-chain.com"})
+	ccPolicy := cauthdsl.SignedByAnyMember([]string{"Bom2buyMSP"})
 
 	resp, err := setup.admin.InstantiateCC(setup.ChannelID, resmgmt.InstantiateCCRequest{Name: setup.ChainCodeID, Path: setup.ChaincodeGoPath, Version: "0", Args: [][]byte{[]byte("init"), []byte("0")}, Policy: ccPolicy})
 	if err != nil || resp.TransactionID == "" {

@@ -35,5 +35,3 @@ clean: env-down
 	@docker rmi `docker images --no-trunc | grep "bom2buy" | cut -d ' ' -f 1` 2>/dev/null || true
 	@echo "Clean up done"
 
-#### clean up everything , delete channels 
-erase: 
